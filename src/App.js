@@ -6,18 +6,18 @@ import XLSX from "xlsx";
 import Header from "./components/Header";
 import styled from "styled-components";
 import Navbar from "./components/Navbar";
-import LabSalesPie from "./components/LabourSalesPie";
-import RevExpBar from "./components/RevExpBar";
-import ExpensePie from "./components/ExpenseChart";
+// import LabSalesPie from "./components/LabourSalesPie";
+// import RevExpBar from "./components/RevExpBar";
+// import ExpensePie from "./components/ExpenseChart";
 import SaleSummBar from "./components/SaleSummaryChart";
-import { Report } from "./components/Report";
+// import { Report } from "./components/Report";
 import data from "./components/data.json";
 import { Locations } from "./components/Locations";
-import { Filter } from "./components/Filter";
-import ScriptTag from "react-script-tag";
+// import { Filter } from "./components/Filter";
+// import ScriptTag from "react-script-tag";
 import Chart from "react-google-charts";
 
-import DatePicker from "react-date-picker";
+// import DatePicker from "react-date-picker";
 
 // import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -120,21 +120,6 @@ function App() {
   );
 }
 
-// function LoginPage(){
-//   return (<form>
-//     <label>
-//       <p>Username</p>
-//       <input type="text" />
-//     </label>
-//     <label>
-//       <p>Password</p>
-//       <input type="password" />
-//     </label>
-//     <div>
-//       <button type="submit">Submit</button>
-//     </div>
-//   </form>);
-// }
 
 function LabornSales() {
   let data2;
@@ -142,10 +127,7 @@ function LabornSales() {
   let boh = 0;
   let laborCost = 0;
   let totalSales = 0;
-  // console.log("data1     " + data2.result2[0]["dept"]);
-  // console.log("data1     " + data2.result2[0]["net"]);
-  // console.log(data2.result2.length);
-  // var d = new Date();
+
   var today = new Date();
   let shopName = "Polygon FOH";
   // var monthRange = String(today.getDate()).padStart(2, '0');
@@ -517,8 +499,6 @@ function SummaryofSales() {
       );
       data1 = result.data;
       console.log(data1);
-      // var d = new Date();
-      // var n = d.getFullYear();
       var n = yearSummarySales;
       console.log(n);
 
@@ -643,36 +623,6 @@ function SummaryofSales() {
           loader={<div>Loading Chart</div>}
           data={data.set}
           options={{
-            // title: "Sales by Categories",
-            // chartArea: { width: "50%" },
-            // legend: {textStyle: {fontSize: 14}},
-            // hAxis: {
-            //   title: "Total Sales in Canadian Dollars",
-            //   minValue: 0,
-            //   textStyle: {
-            //     bold: true,
-            //     fontSize: 10,
-            //     color: "#4d4d4d",
-            //   },
-            //   titleTextStyle: {
-            //     bold: true,
-            //     fontSize: 10,
-            //     color: "#4d4d4d",
-            //   },
-            // },
-            // vAxis: {
-            //   title: "Category",
-            //   textStyle: {
-            //     fontSize: 10,
-            //     bold: true,
-            //     color: "#848484",
-            //   },
-            //   titleTextStyle: {
-            //     fontSize: 10,
-            //     bold: true,
-            //     color: "#848484",
-            //   },
-            // },
             chart: {
               title: "Sales Summary Annual",
             },
@@ -1377,44 +1327,13 @@ function Overview() {
   };
 
   return (
-    <BodyWrap>
+   
       <div className="charts_container">
         <SaleSummBar />
-        {/* <RevExpBar /> */}
       </div>
-      {/* <div className="charts_container"> */}
-      {/* <LabSalesPie /> */}
-      {/* <ExpensePie /> */}
-      {/* </div> */}
-      <Filter
-        data={Locations}
-        title={location_prompt}
-        selected={selected}
-        onSelectedChange={setSelected}
-      />
-      <DatePicker id="example-datepicker" onChange={onChange1} value={value1} />
-      <DatePicker id="example-datepicker" onChange={onChange2} value={value2} />
-      <Report data={data} />
-    </BodyWrap>
+     
   );
 
-  // return (
-  //   <div>
-  //     <div className="charts_container">
-  //       <SaleSummBar />
-  //       {/* <RevExpBar /> */}
-  //       {/* <LabSalesPie /> */}
-  //       {/* <ExpensePie /> */}
-  //     </div>
-  //     <Filter
-  //       data={Locations}
-  //       title={location_prompt}
-  //       selected={selected}
-  //       onSelectedChange={setSelected}
-  //     />
-  //     <Report data={data} />
-  //   </div>
-  // );
 }
 
 function emailFunction() {
@@ -1453,6 +1372,7 @@ function Logout() {
         <h2>Logout</h2>
       </HeaderWrap>
       <h3>Are you sure you want to logout?</h3>
+      <br></br>
       <button onClick={clearSession}>Logout</button>
     </div>
   );
