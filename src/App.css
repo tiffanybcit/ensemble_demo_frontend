@@ -96,11 +96,7 @@ input:focus {
 #supportWrapper{
   text-align: center;
 }
-#innerSupportWrapper{
-  text-align: center;
-  font-size: large;
-  line-height: 200%;
-}
+
 
 #buttonMailto{
   margin-top: 1em;

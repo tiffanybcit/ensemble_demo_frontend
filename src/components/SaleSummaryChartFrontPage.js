@@ -44,7 +44,7 @@ const BarChart = () => {
 
   const [data, setData] = useState({
     set: [
-      ['Month', 'FOH', 'BOH'],
+      ["Month", "FOH", "BOH"],
       ["Jan.", foh1, boh1],
       ["Feb.", foh2, boh2],
       ["Mar.", foh3, boh3],
@@ -62,12 +62,12 @@ const BarChart = () => {
 
   useEffect(async () => {
     const result = await axios.get(
-      "https://nemesisproj.herokuapp.com/readSalesData"
+      "https://ensemble-tiffany-demo.herokuapp.com/readSalesData"
     );
     data1 = result.data;
     var d = new Date();
-    // var n = d.getFullYear();
-    var n = 2020;
+    var n = d.getFullYear();
+    // var n = 2020;
     console.log(n);
 
     for (let i = 0; i < data1["category"].length; i++) {
@@ -128,7 +128,7 @@ const BarChart = () => {
       }
     }
     let dataSet = [
-      ['Month', 'FOH', 'BOH'],
+      ["Month", "FOH", "BOH"],
       ["Jan.", foh1, boh1],
       ["Feb.", foh2, boh2],
       ["Mar.", foh3, boh3],
@@ -217,7 +217,6 @@ const BarChart = () => {
           },
           chart: {
             title: "Net Sales Summary Annual",
-          
           },
         }}
         // For tests
