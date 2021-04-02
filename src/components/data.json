@@ -1,0 +1,279 @@
+{
+    "Header": {
+        "Time": "2021-03-09T16:31:11-08:00",
+        "ReportName": "ProfitAndLoss",
+        "ReportBasis": "Accrual",
+        "StartPeriod": "2021-01-01",
+        "EndPeriod": "2021-03-02",
+        "SummarizeColumnsBy": "Total",
+        "Currency": "CAD",
+        "Option": [
+            {
+                "Name": "AccountingStandard",
+                "Value": "IFRS"
+            },
+            {
+                "Name": "NoReportData",
+                "Value": "false"
+            }
+        ]
+    },
+    "Columns": {
+        "Column": [
+            {
+                "ColTitle": "",
+                "ColType": "Account",
+                "MetaData": [
+                    {
+                        "Name": "ColKey",
+                        "Value": "account"
+                    }
+                ]
+            },
+            {
+                "ColTitle": "Total",
+                "ColType": "Money",
+                "MetaData": [
+                    {
+                        "Name": "ColKey",
+                        "Value": "total"
+                    }
+                ]
+            }
+        ]
+    },
+    "Rows": {
+        "Row": [
+            {   
+                "Header": {
+                    "ColData": [
+                        {
+                            "value": "INCOME"
+                        },
+                        {
+                            "value": ""
+                        }
+                    ]
+                },
+                "Rows": {
+                    "Row": [
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Sales of Product Income",
+                                    "id": "67"
+                                },
+                                {
+                                    "value": "12550.00"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Services",
+                                    "id": "1"
+                                },
+                                {
+                                    "value": "2800.00"
+                                }
+                            ],
+                            "type": "Data"
+                        }
+                    ]
+                },
+                "Summary": {
+                    "ColData": [
+                        {
+                            "value": "Total Income"
+                        },
+                        {
+                            "value": "15350.00"
+                        }
+                    ]
+                },
+                "type": "Section",
+                "group": "Income"
+            },
+            {
+                "Header": {
+                    "ColData": [
+                        {
+                            "value": "COST OF GOODS SOLD"
+                        },
+                        {
+                            "value": ""
+                        }
+                    ]
+                },
+                "Rows": {
+                    "Row": [
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Cost of Goods Sold",
+                                    "id": "84"
+                                },
+                                {
+                                    "value": "6362.94"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Cost of Sales - billable expenses",
+                                    "id": "44"
+                                },
+                                {
+                                    "value": "15750.00"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Inventory Shrinkage",
+                                    "id": "88"
+                                },
+                                {
+                                    "value": "0.00"
+                                }
+                            ],
+                            "type": "Data"
+                        }
+                    ]
+                },
+                "Summary": {
+                    "ColData": [
+                        {
+                            "value": "Total Cost of Goods Sold"
+                        },
+                        {
+                            "value": "22112.94"
+                        }
+                    ]
+                },
+                "type": "Section",
+                "group": "COGS"
+            },
+            {
+                "Header": {
+                    "ColData": [
+                        {
+                            "value": "EXPENSES"
+                        },
+                        {
+                            "value": ""
+                        }
+                    ]
+                },
+                "Rows": {
+                    "Row": [
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Insurance Expense-General Liability Insurance",
+                                    "id": "51"
+                                },
+                                {
+                                    "value": "750.00"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Interest expense",
+                                    "id": "89"
+                                },
+                                {
+                                    "value": "190.00"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Rent Expense",
+                                    "id": "64"
+                                },
+                                {
+                                    "value": "2500.00"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Utilities - Electric & Gas",
+                                    "id": "82"
+                                },
+                                {
+                                    "value": "418.30"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Utilities - Water",
+                                    "id": "83"
+                                },
+                                {
+                                    "value": "146.06"
+                                }
+                            ],
+                            "type": "Data"
+                        },
+                        {
+                            "ColData": [
+                                {
+                                    "value": "Depreciation Expense",
+                                    "id": "45"
+                                },
+                                {
+                                    "value": "33.33"
+                                }
+                            ],
+                            "type": "Data"
+                        }
+                    ]
+                },
+                "Summary": {
+                    "ColData": [
+                        {
+                            "value": "Total Expenses"
+                        },
+                        {
+                            "value": "4037.69"
+                        }
+                    ]
+                },
+                "type": "Section",
+                "group": "Expenses"
+            },
+            {
+                "Summary": {
+                    "ColData": [
+                        {
+                            "value": "PROFIT"
+                        },
+                        {
+                            "value": "-10800.63"
+                        }
+                    ]
+                },
+                "type": "Section",
+                "group": "NetIncome"
+            }
+        ]
+    }
+}
