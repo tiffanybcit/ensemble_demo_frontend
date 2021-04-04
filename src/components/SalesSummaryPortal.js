@@ -317,7 +317,7 @@ return (
       {/* <div id="chart_div" style="width: 1000px; height: 500px;"></div> */}
       <br></br>
       <label htmlFor="year">Choose a year: </label>
-      <input type="number" id="year" placeholder="Type year here!" />
+      <input type="number" id="year" />
       <br></br>
       <br></br>
       <div id="shopOption">

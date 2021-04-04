@@ -85,10 +85,11 @@ export const SidebarData = [
     path: '/support',
     icon: <IoIcons.IoMdHelpCircle />
   },
-  // {
-  //   title: 'Setting',
-  //   icon: <IoIcons.IoIosSettings />
-  // },
+  {
+    title: 'Notebook',
+    path:"/notebook",
+    icon: <IoIcons.IoMdNotificationsOutline />
+  },
   {
     title: 'Logout',
     path:'/logout',
