@@ -166,10 +166,15 @@ const FunAPI = () => {
         gridBox.appendChild(break1);
       });
   }, []);
+  function refreshFunction(){
+      window.location.reload();
+  }
 
   return (
-    <div>
+    <div id="overviewWrapper">
+        <button onClick={refreshFunction}>Get a new one!</button>
       <div id="tacoRecipeBox"></div>
+      <button onClick={refreshFunction}>Get a new one!</button>
     </div>
   );
 };
