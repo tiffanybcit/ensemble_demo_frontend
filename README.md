@@ -1,4 +1,4 @@
-# KBITxNemesis-Dashboard
+# ENSEMBLE DEMO
 
 # Getting Started with Create React App
 
