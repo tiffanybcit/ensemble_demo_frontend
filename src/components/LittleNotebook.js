@@ -37,12 +37,13 @@ const LittleNotebook = () => {
       .get("https://ensemble-tiffany-demo.herokuapp.com/readTask")
       .then((response) => {
         msgData = response.data;
-        let bodyWrapper = document.getElementById("msgBox");
+        
 
         // =============================
         // ASSEMBLE LIST DYNAMICALLY
         // =============================
         for (i = 0; i < response.data.length; i++) {
+          let bodyWrapper = document.getElementById("msgBox");
           let gridBox = document.createElement("div");
           bodyWrapper.appendChild(gridBox);
           gridBox.setAttribute("class", "gridContainer");
@@ -176,10 +177,8 @@ const LittleNotebook = () => {
     filter = input.value.toUpperCase();
     ul = document.getElementById("msgBox");
     li = ul.getElementsByClassName("gridContainer");
-    console.log(li[1]);
     for (i = 0; i < li.length; i++) {
       a = li[i].getElementsByTagName("h1")[0];
-      console.log(a.innerHTML);
       txtValue = a.textContent || a.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         li[i].style.display = "";

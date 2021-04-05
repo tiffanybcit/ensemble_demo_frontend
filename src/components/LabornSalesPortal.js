@@ -2,28 +2,25 @@ import { Chart } from "react-google-charts";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// ===============
+// COMPONENT
+// ===============
 const LabornSales = () => {
-  let data2;
+  // =====================
+  // INITIAL STATES
+  // =====================
   let foh = 0;
   let boh = 0;
   let laborCost = 0;
   let totalSales = 0;
 
+  // CURRENT YEAR
   var today = new Date();
-  // let branchNameOverview = "Polygon FOH";
-
-  // var monthRangeOverview = String(today.getMonth() + 1).padStart(2, ""); //January is 0!
   var yearRangeOverview = today.getFullYear();
 
-  console.log();
-  // console.log(monthRange);
-  console.log();
-  console.log(yearRangeOverview);
-  console.log();
-  // console.log(branchNameOverview);
-  // alert("datamonth"+data1["month"][0]);
-  // alert("datamonth"+monthRange);
-
+  // ==============================
+  // SET INITIAL STATES
+  // ==============================
   const [data, setData] = useState({
     set: [
       ["Division", "Sales"],
@@ -33,6 +30,10 @@ const LabornSales = () => {
   });
 
   useEffect(async () => {
+
+    //========================
+    // READ DATA FROM API
+    //========================
     const result = await axios.get(
       "https://ensemble-tiffany-demo.herokuapp.com/readLaborAndSales"
     );
@@ -42,60 +43,52 @@ const LabornSales = () => {
       ["Labor/Sales", laborCost],
       ["", totalSales - laborCost],
     ];
-
+    let data2;
     data2 = result.data;
-    console.log(data2);
-    // console.log(data2.result2.length);
+    // console.log(data2);
 
-    // console.log(branchNameOverview.includes(data2.result2[0]["shop"]) == true);
-    console.log(data2.result2[0]["dept"].localeCompare("FOH") == 0);
-    console.log(data2.result2[13]["year"] == yearRangeOverview);
-    // console.log(data2.result2[13]["month"] == monthRange);
-
+    // ==============================
+    // ASSIGNS SALES DATA
+    // ==============================
     for (let i = 0; i < data2.result2.length; i++) {
       if (data2.result2[i]["dept"] != null) {
         if (
-      
           data2.result2[i]["dept"].localeCompare("FOH") == 0 &&
           data2.result2[i]["year"].localeCompare(
             yearRangeOverview.toString()
           ) == 0
         ) {
           foh = foh + parseInt(data2.result2[i]["net"]);
-          console.log("it gets here!");
         } else if (
-        
           data2.result2[i]["dept"].localeCompare("BOH") == 0 &&
           data2.result2[i]["year"].localeCompare(
             yearRangeOverview.toString()
           ) == 0
         ) {
           boh = boh + parseInt(data2.result2[i]["net"]);
-          console.log("it gets here!!!!");
         }
       }
     }
 
+    // ==============================
+    // ASSIGNS LABOR DATA
+    // ==============================
     for (let j = 0; j < data2.result1.length; j++) {
-      // if (data2.result1[j]["dept"].localeCompare(branchNameOverview) == 0) {
-        laborCost = data2.result1[j]["total"];
-      // }
+      laborCost += data2.result1[j]["total"];
     }
-    console.log("dataaaaa   " + foh);
-    console.log("dataaaaa   " + boh);
 
-   
-    totalSales = boh;
-   
+    totalSales = boh + foh;
 
-    console.log(totalSales - laborCost);
     if (totalSales - laborCost < 0) {
       alert("totalSales-laborCost has a negative value!");
+      window.location.reload();
     }
 
+    // ==================================
+    // UPDATE STATE
+    // ==================================
     dataSet[1][1] = laborCost;
     dataSet[2][1] = totalSales - laborCost;
-    console.log("trigger 1", dataSet);
 
     setData({ set: dataSet });
   }, []);
@@ -108,11 +101,9 @@ const LabornSales = () => {
       .options[
       document.getElementById("shopSelectionLabornSales").selectedIndex
     ].text;
-    console.log(branchName);
     let yearRange = document.getElementById("nearLabornSales").value;
-    console.log(yearRange);
+
     let typeofReport = document.getElementById("gornLabornSales").value;
-    console.log(typeofReport);
 
     // error checking: fields cannot be empty
     if (branchName == "" || yearRange == "" || typeofReport == "") {
@@ -120,6 +111,10 @@ const LabornSales = () => {
       window.location.reload();
     } else {
       (async () => {
+
+        //========================
+        // READ DATA FROM API
+        //========================
         const result = await axios.get(
           "https://ensemble-tiffany-demo.herokuapp.com/readLaborAndSales"
         );
@@ -129,14 +124,12 @@ const LabornSales = () => {
           ["Labor/Sales", laborCost],
           ["", totalSales - laborCost],
         ];
-
+        let data2;
         data2 = result.data;
-        console.log(data2);
 
-        console.log(branchName.includes(data2.result2[0]["shop"]) == true);
-        console.log(data2.result2[0]["dept"].localeCompare("FOH") == 0);
-        console.log(data2.result2[13]["year"] == yearRange);
-
+        // ==============================
+        // ASSIGNS SALES DATA
+        // ==============================
         for (let i = 0; i < data2.result2.length; i++) {
           if (data2.result2[i]["dept"] != null) {
             if (
@@ -145,25 +138,24 @@ const LabornSales = () => {
               data2.result2[i]["year"].localeCompare(yearRange.toString()) == 0
             ) {
               foh = foh + parseInt(data2.result2[i][typeofReport]);
-              console.log("it gets here!");
             } else if (
               branchName.includes(data2.result2[i]["shop"]) == true &&
               data2.result2[i]["dept"].localeCompare("BOH") == 0 &&
               data2.result2[i]["year"].localeCompare(yearRange.toString()) == 0
             ) {
               boh = boh + parseInt(data2.result2[i][typeofReport]);
-              console.log("it gets here!!!!");
             }
           }
         }
 
+        // ==============================
+        // ASSIGNS LABOR DATA
+        // ==============================
         for (let j = 0; j < data2.result1.length; j++) {
           if (data2.result1[j]["dept"].localeCompare(branchName) == 0) {
-            laborCost = data2.result1[j]["total"];
+            laborCost += data2.result1[j]["total"];
           }
         }
-        console.log("dataaaaa   " + foh);
-        console.log("dataaaaa   " + boh);
 
         if (branchName.includes("FOH")) {
           totalSales = foh;
@@ -171,14 +163,16 @@ const LabornSales = () => {
           totalSales = boh;
         }
 
-        console.log(totalSales - laborCost);
         if (totalSales - laborCost < 0) {
           alert("totalSales-laborCost has a negative value!");
+          window.location.reload();
         }
 
+        // ==================================
+        // UPDATE STATE
+        // ==================================
         dataSet[1][1] = laborCost;
         dataSet[2][1] = totalSales - laborCost;
-        console.log("trigger 1", dataSet);
 
         setData({ set: dataSet });
       })();

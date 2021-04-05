@@ -1,11 +1,12 @@
-// import * as React from "react";
 import { Chart } from "react-google-charts";
-// import React, { useState, useEffect } from "react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+// =======================
+// COMPONENT
+// =======================
 const SalesbyDeptPortal = () => {
-  let data1;
+  
   let boh = 0;
   let foh = 0;
 
@@ -17,17 +18,20 @@ const SalesbyDeptPortal = () => {
     ],
   });
 
+  // =======================================================================================
+  // The function passed to useEffect will run after the render is committed to the screen. 
+  // =======================================================================================
   useEffect(async () => {
     const result = await axios.get(
       "https://ensemble-tiffany-demo.herokuapp.com/readSalesData"
     );
 
     let dataSet = [
-      ["City", "2010 Population"],
+      ["Department", "Sales"],
       ["BOH", boh],
       ["FOH", foh],
     ];
-
+    let data1;
     data1 = result.data;
 
     for (let i = 0; i < data1["category"].length; i++) {
@@ -40,36 +44,35 @@ const SalesbyDeptPortal = () => {
       }
     }
 
-    console.log(`foh ${foh}, boh ${boh}`);
-
     dataSet[1][1] = boh;
     dataSet[2][1] = foh;
-    console.log("trigger 1", dataSet);
 
     setData({ set: dataSet });
   }, []);
 
-  // fetch data from a url endpoint
-
+  // =======================================
+  // FUNCTION TRIGGERED BY CLICKING BUTTON
+  // =======================================
   function GenerateNewPieChart() {
     let timeRange = document.getElementById("kindofRepoSales").options[
       document.getElementById("kindofRepoSales").selectedIndex
     ].text;
-    console.log(timeRange);
     let yearRange = document.getElementById("year").value;
-    console.log(yearRange);
     let monthRange = document.getElementById("month").selectedIndex + 1;
-    console.log(monthRange);
     let typeofReport = document.getElementById("gorn").value;
-    console.log(typeofReport);
 
     let shopName = document.getElementById("shopSelection").options[
       document.getElementById("shopSelection").selectedIndex
     ].text;
-    console.log(shopName);
+    
+    // ERROR CATCHING
     if (!timeRange || !typeofReport) {
       alert("Missing a field!");
     } else {
+
+      // ================
+      // YEARLY REPORT
+      // ================
       if (timeRange.localeCompare("Yearly") == 0) {
         console.log("You have selected yearly!");
         (async () => {
@@ -84,7 +87,9 @@ const SalesbyDeptPortal = () => {
 
           let ret = result.data; // return value
 
-          // do algorithm here
+          // ===================
+          // algorithm here
+          // ===================
           for (let i = 0; i < ret["category"].length; i++) {
             if (ret["division"][i] != null) {
               if (
@@ -102,13 +107,20 @@ const SalesbyDeptPortal = () => {
               }
             }
           }
+
+          // ==========================
           // this updates the dataset
+          // ==========================
           dataSet[1][1] = boh;
           dataSet[2][1] = foh;
 
           setData({ set: dataSet });
         })();
-      } else if (timeRange.localeCompare("Monthly") == 0) {
+      }
+      // =========================
+      // MONTHLY REPORT
+      // ========================= 
+      else if (timeRange.localeCompare("Monthly") == 0) {
         console.log("You have selected monthly!");
         (async () => {
           const result = await axios.get(
@@ -122,7 +134,9 @@ const SalesbyDeptPortal = () => {
 
           let ret = result.data; // return value
 
+          // =====================
           // do algorithm here
+          // =====================
           for (let i = 0; i < ret["category"].length; i++) {
             if (ret["division"][i] != null) {
               if (
@@ -142,14 +156,21 @@ const SalesbyDeptPortal = () => {
               }
             }
           }
+
+          // ==========================
           // this updates the dataset
+          // ==========================
           dataSet[1][1] = boh;
           dataSet[2][1] = foh;
           console.log('trigger 1', dataSet);
 
           setData({ set: dataSet });
         })();
-      } else if (timeRange.localeCompare("So Far One Store") == 0) {
+      } 
+      // ==============================
+      // SO FAR ONE STORE REPORT
+      // ==============================
+      else if (timeRange.localeCompare("So Far One Store") == 0) {
         console.log("You have selected so far for one store!");
         (async () => {
           const result = await axios.get(
@@ -163,7 +184,9 @@ const SalesbyDeptPortal = () => {
 
           let ret = result.data; // return value
 
+          // ===================
           // do algorithm here
+          // ===================
           for (let i = 0; i < ret["category"].length; i++) {
             if (ret["division"][i] != null) {
               if (
@@ -179,14 +202,21 @@ const SalesbyDeptPortal = () => {
               }
             }
           }
+
+          // =========================
           // this updates the dataset
+          // =========================
           dataSet[1][1] = boh;
           dataSet[2][1] = foh;
           console.log('trigger 1', dataSet);
 
           setData({ set: dataSet });
         })();
-      } else {
+      } 
+      // ======================================
+      // GENERAL REPORT SO FAR
+      // ======================================
+      else {
         console.log("You have selected across all stores!");
         (async () => {
           const result = await axios.get(
@@ -200,17 +230,22 @@ const SalesbyDeptPortal = () => {
 
           let ret = result.data; // return value
 
+          // ====================
           // do algorithm here
+          // ====================
           for (let i = 0; i < ret["category"].length; i++) {
             if (ret["division"][i] != null) {
               if (ret["division"][i].localeCompare("FOH") == 0) {
                 foh = foh + parseInt(ret[typeofReport][i]);
-              } else {
+              } else if (ret["division"][i].localeCompare("BOH") == 0) {
                 boh = boh + parseInt(ret[typeofReport][i]);
               }
             }
           }
+
+          // ===========================
           // this updates the dataset
+          // ===========================
           dataSet[1][1] = boh;
           dataSet[2][1] = foh;
           console.log('trigger 1', dataSet);
@@ -221,7 +256,9 @@ const SalesbyDeptPortal = () => {
     }
   }
 
+  // ========================================================
   // helper function to hide certain options when triggered
+  // ========================================================
   function ToggleFunctionPie() {
     let kindofRepoElement = document.getElementById("kindofRepoSales");
     let kindofRepoElementText =
@@ -248,20 +285,12 @@ const SalesbyDeptPortal = () => {
 
   return (
     <div>
-      {/* <HeaderWrap>
-          <h2>Sales by Departments</h2>
-        </HeaderWrap> */}
-      <div id="PieGraphTitle"></div>
-      {/* <div id="piechart"></div> */}
       <Chart
         width={1200}
         height={500}
         chartType="PieChart"
         loader={<div>Loading Chart</div>}
         data={data.set}
-        // options={{
-        //   title: "Sales Summary So Far All Stores",
-        // }}
         legendToggle
       />
 

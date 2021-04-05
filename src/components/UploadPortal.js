@@ -1,21 +1,19 @@
-// import * as React from "react";
-// import { Chart } from "react-google-charts";
-// import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
 import XLSX from "xlsx";
 
-// import "../styles/Support.css";
+//========================
+// COMPONENT
+//========================
 const UploadPortal = () => {
   // State to store uploaded file
   const [file, setFile] = React.useState("");
   function ToggleFunction() {
-    let kind = document.getElementById("category");
-    let kind2 = kind.options[kind.selectedIndex].text;
-    console.log(kind.options[kind.selectedIndex].text);
-    console.log(kind2.localeCompare("RISE LABOR"));
+    let typeofUpload = document.getElementById("category");
+    let typeofUploadText =
+      typeofUpload.options[typeofUpload.selectedIndex].text;
 
-    if (kind2.localeCompare("Labor Cost") == 0) {
+    if (typeofUploadText.localeCompare("Labor Cost") == 0) {
       document.getElementById("store").style.visibility = "hidden";
       document.getElementById("storeLabel").style.visibility = "hidden";
     } else {
@@ -24,22 +22,28 @@ const UploadPortal = () => {
     }
   }
 
-  // Handles file upload event and updates state
+  //========================
+  // UPDATE FILE INFORMATION
+  //========================
   function handleUpload(event) {
     setFile(event.target.files[0]);
-
-    // Add code here to upload file to server
-    // ...
   }
+
+  //==============================
+  // HELPER FUNCTION PARSING EXCEL
+  //==============================
   function processExcel(data) {
     const workbook = XLSX.read(data, { type: "binary" });
     const firstSheet = workbook.SheetNames[0];
     const excelRows = XLSX.utils.sheet_to_row_object_array(
       workbook.Sheets[firstSheet]
     );
-    console.log(excelRows);
     return excelRows;
   }
+
+  //================================
+  // TRIGGER CLICKING UPLOAD BUTTON
+  //================================
   function uploadData(e) {
     e.preventDefault();
 
@@ -59,17 +63,17 @@ const UploadPortal = () => {
     const regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
     let rowobj;
     if (regex.test(fileUpload.value.toLowerCase())) {
-      // let fileName = fileUpload.files[0].name;
       if (typeof FileReader !== "undefined") {
         const reader = new FileReader();
         if (reader.readAsBinaryString) {
           reader.onload = (e) => {
             rowobj = processExcel(reader.result);
-            // console.log(rowobj);
-            if (year > 2010 && year < 2040) {
+
+            if (year > 2015 && year < 2025) {
               if (category.localeCompare("Labor Cost") == 0) {
-                // alert("hello");
-                // console.log(data);
+                //========================
+                // WRITE LABOR DATA TO API
+                //========================
                 axios
                   .post(
                     "https://ensemble-tiffany-demo.herokuapp.com/writeLaborCost",
@@ -88,7 +92,9 @@ const UploadPortal = () => {
                     }
                   });
               } else {
-                // console.log("hi");
+                //========================
+                // WRITE SALES DATA TO API
+                //========================
                 axios
                   .post(
                     "https://ensemble-tiffany-demo.herokuapp.com/writeMonthlySalesData",
@@ -99,18 +105,20 @@ const UploadPortal = () => {
                       rowobj: rowobj,
                     }
                   )
-                  .then(function refresh() {
-                    alert("Thanks for submission!");
-                  })
+                  .then(
+                    alert("Thanks for submission!")
+                  )
                   .then(function (response) {
+                    console.log(response);
                     if (response.data.msg.localeCompare("success") == 0) {
                       window.location.reload();
                     } else {
                       alert("Error!");
                     }
                   });
-                // .then(window.location.reload());
               }
+            } else {
+              alert("Contact support team!");
             }
           };
           reader.readAsBinaryString(fileUpload.files[0]);

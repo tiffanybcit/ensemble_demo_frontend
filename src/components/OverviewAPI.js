@@ -1,24 +1,28 @@
-// import * as React from "react";
-// import { Chart } from "react-google-charts";
-// import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import "../styles/Overview.css";
 
-// import "../styles/Support.css";
+// ======================
+// COMPONENT
+// ======================
 const FunAPI = () => {
   useEffect(async () => {
+    // =======================================
+    // FETCH DATA FROM THIS API AND ASSEMBLE
+    // =======================================
     axios
       .get("http://taco-randomizer.herokuapp.com/random/")
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data);
-        //   let msgData = response.data;
+        // ==================
+        // WRAPPER
+        // ==================
         let bodyWrapper = document.getElementById("tacoRecipeBox");
-
         let gridBox = document.createElement("div");
         gridBox.setAttribute("class", "gridContainer");
 
+        // ========================
+        // CONDIMENT
+        // ========================
         let condimentTitle = document.createElement("div");
         condimentTitle.innerHTML =
           "<h2>Condiment Name</h2><br>" +
@@ -29,7 +33,6 @@ const FunAPI = () => {
         addBtnCond.innerHTML = "+";
 
         addBtnCond.addEventListener("click", addFunctionCond);
-
 
         let condimentDetail = document.createElement("div");
         condimentDetail.innerHTML =
@@ -44,6 +47,9 @@ const FunAPI = () => {
           }
         }
 
+        // =======================
+        // MIXING
+        // =======================
         let mixinTitle = document.createElement("div");
         mixinTitle.innerHTML =
           "<br><h2>Mixin Name</h2><br>" +
@@ -67,6 +73,9 @@ const FunAPI = () => {
           }
         }
 
+        // ==========================
+        // BASE LAYER 
+        // ==========================
         let baseLayerTitle = document.createElement("div");
         baseLayerTitle.innerHTML =
           "<br><h2>Base Layer Name</h2><br>" +
@@ -91,6 +100,9 @@ const FunAPI = () => {
           }
         }
 
+        // =======================
+        // SEASONING
+        // =======================
         let seasoningTitle = document.createElement("div");
         seasoningTitle.innerHTML =
           "<br><h2>Seasoning Name</h2><br>" +
@@ -114,6 +126,9 @@ const FunAPI = () => {
           }
         }
 
+        // ========================
+        // SHELL
+        // ========================
         let shellTitle = document.createElement("div");
         shellTitle.innerHTML =
           "<br><h2>Shell Name</h2><br>" +
@@ -137,42 +152,49 @@ const FunAPI = () => {
           }
         }
 
+        // ========================
+        // ATTACH THESE ELEMENTS
+        // ========================
         bodyWrapper.appendChild(gridBox);
         gridBox.appendChild(condimentTitle);
         gridBox.appendChild(addBtnCond);
-
         gridBox.appendChild(condimentDetail);
-
-        condimentDetail.style.display = "none";
         gridBox.appendChild(mixinTitle);
         gridBox.appendChild(addBtnMixin);
-
         gridBox.appendChild(mixinDetail);
-        mixinDetail.style.display = "none";
         gridBox.appendChild(baseLayerTitle);
         gridBox.appendChild(addBtnBase);
         gridBox.appendChild(baseLayerDetails);
-        baseLayerDetails.style.display = "none";
-
         gridBox.appendChild(seasoningTitle);
         gridBox.appendChild(addBtnseas);
         gridBox.appendChild(seasoningDetails);
-        seasoningDetails.style.display = "none";
         gridBox.appendChild(shellTitle);
         gridBox.appendChild(addBtnShell);
         gridBox.appendChild(shellDetails);
+
+        // ======================
+        // INITIAL STATE: HIDE
+        // ======================
+        condimentDetail.style.display = "none";
+        mixinDetail.style.display = "none";
+        baseLayerDetails.style.display = "none";
+        seasoningDetails.style.display = "none";
         shellDetails.style.display = "none";
+
+        // ==================
+        // ADD A LINE BREAK
+        // ==================
         let break1 = document.createElement("BR");
         gridBox.appendChild(break1);
       });
   }, []);
-  function refreshFunction(){
-      window.location.reload();
+  function refreshFunction() {
+    window.location.reload();
   }
 
   return (
     <div id="overviewWrapper">
-        <button onClick={refreshFunction}>Get a new one!</button>
+      <button onClick={refreshFunction}>Get a new one!</button>
       <div id="tacoRecipeBox"></div>
       <button onClick={refreshFunction}>Get a new one!</button>
     </div>

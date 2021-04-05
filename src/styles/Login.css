@@ -2,8 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 3em;
 }
 
+h1{
+    margin-bottom: 1em;
+}
 
 #LoginBtn{
     text-align: center;

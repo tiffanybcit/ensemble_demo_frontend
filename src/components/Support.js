@@ -1,6 +1,14 @@
 import React from "react";
 import "../styles/Support.css";
+
+// ==============================
+// COMPONENT
+// ==============================
 const Support = () => {
+
+  // ======================
+  // HELPER FUNCTION
+  // ======================
   function emailFunction() {
     window.location.href = "mailto:ygu32@my.bcit.ca";
   }

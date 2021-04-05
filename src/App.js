@@ -1,43 +1,22 @@
-//import logo from './nemesislogo.png';
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-// import { Helmet } from "react-helmet";
-
-import Header from "./components/Header";
+import React from "react";
 import styled from "styled-components";
-import Navbar from "./components/Navbar";
-// import LabSalesPie from "./components/LabourSalesPie";
-// import RevExpBar from "./components/RevExpBar";
-// import ExpensePie from "./components/ExpenseChart";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// COMPONENTS
 import LogoutPage from "./components/Logout";
 import SupportPage from "./components/Support";
 import UploadPortal from "./components/UploadPortal";
 import SummaryofSalesPortal from "./components/SalesSummaryPortal";
 import SalesbyDeptsPortal from "./components/SalesbyDeptsPortal";
-import LabornSales from "./components/LabornSales";
+import LabornSales from "./components/LabornSalesPortal";
 import LittleNotebook from "./components/LittleNotebook";
 import OverviewAPI from "./components/OverviewAPI";
-// import { Report } from "./components/Report";
-import data from "./components/data.json";
-// import { Locations } from "./components/Locations";
-// import { Filter } from "./components/Filter";
-// import ScriptTag from "react-script-tag";
-import Chart from "react-google-charts";
-
-// import DatePicker from "react-date-picker";
-
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import "./App.css";
 import Login from "../src/components/Login";
 import UseToken from "./js/UseToken";
-
 import Sidebar from "./components/SideBar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { FaHockeyPuck } from "react-icons/fa";
-// import Overview from './pages/Overview';
-// import { Reports, ReportsOne, ReportsTwo, ReportsThree } from './pages/Reports';
-// import Team from './pages/Team';
+
+// STYLE SHEET
+import "./App.css";
 
 // credits to https://github.com/briancodex/react-sidebar-dropdown/blob/main/src/App.js
 const HeaderWrap = styled.div`
@@ -47,20 +26,13 @@ const HeaderWrap = styled.div`
   color: grey;
 `;
 
-const BodyWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 function App() {
-  // const token = getToken();
+  // destructuring the setToken and token values
   const { token, setToken } = UseToken();
-  console.log(token);
 
-  // const [token, setToken] = useState();
+  // display Login if the token is falsy
   if (!token) {
     return <Login setToken={setToken} />;
-  } else {
   }
   return (
     <>
@@ -68,23 +40,20 @@ function App() {
         <Router>
           <Sidebar />
           <div id="content">
-            <Navbar>
-              {/* <NavIcon to='#'>
-                <FaIcons.FaBars onClick={showSidebar} />
-              </NavIcon> */}
-            </Navbar>
-
+            {/* The added functionality of Switch is that it will only render the first matched <Route/> child.  */}
             <Switch>
+              {/* The < Router /> component wraps our main application routing. 
+              Nested within Router will be all of our < Route /> components, which will point to all other URLs. */}
               <Route path="/overview">
                 <Overview />
               </Route>
-              <Route path="/graphs/summaryofsales">
+              <Route path="/reports/summaryofsales">
                 <SummaryofSales />
               </Route>
-              <Route path="/graphs/salesbydepartment">
+              <Route path="/reports/salesbydepartment">
                 <SalesbyDept />
               </Route>
-              <Route path="/graphs/labourbysales">
+              <Route path="/reports/labourbysales">
                 <LaborSales />
               </Route>
               <Route path="/upload">
@@ -108,6 +77,10 @@ function App() {
   );
 }
 
+
+// ==============
+// TODOLIST TAB
+// ==============
 function TodoList() {
   return (
     <div id="WrapperTodoList">
@@ -120,6 +93,9 @@ function TodoList() {
   );
 }
 
+// ======================
+// LABOR / SALES REPORT
+// ======================
 function LaborSales() {
   return (
     <div id="WrapperLabornSales">
@@ -131,6 +107,9 @@ function LaborSales() {
   );
 }
 
+// ============================
+// YEARLY SUMMARY SALES REPORT
+// ============================
 function SummaryofSales() {
   return (
     <div id="WrapperSalesSummary">
@@ -153,6 +132,9 @@ function SalesbyDept() {
   );
 }
 
+// ==================
+// UPLOAD PORTAL
+// ==================
 function FileUploadPage() {
   return (
     <div id="wrapperUploadPortal">
@@ -164,9 +146,12 @@ function FileUploadPage() {
   );
 }
 
+// =====================
+// OVERVIEW PAGE - TACO
+// =====================
 function Overview() {
   return (
-    <div>
+    <div id="overviewWrapper">
       <HeaderWrap>
         <h2>Welcome Back! Here is your daily taco recipe!!</h2>
       </HeaderWrap>
@@ -175,6 +160,9 @@ function Overview() {
   );
 }
 
+// ======================
+// SUPPORT PAGE
+// ======================
 function Support() {
   return (
     <div id="supportWrapper">
@@ -186,6 +174,9 @@ function Support() {
   );
 }
 
+// =================
+// LOGOUT PAGE
+// =================
 function Logout() {
   return (
     <div id="WrapperLogout">

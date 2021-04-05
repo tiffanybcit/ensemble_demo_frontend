@@ -1,9 +1,7 @@
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* font-family: "Lato", sans-serif; */
   font-family: Raleway;
 }
 
@@ -20,10 +18,11 @@
   font-size: 3rem;
 }
 
-.sideBar_container, #content {
+.sideBar_container,
+#content {
   display: flex;
   height: 100%;
-  
+
 }
 
 #content {
@@ -33,16 +32,21 @@
   margin-bottom: 20px;
 }
 
-#wrapperUploadPortal{
+#wrapperUploadPortal,
+#overviewWrapper,
+#WrapperTodoList,
+#supportWrapper {
   text-align: center;
   font-size: 15pt;
 }
 
-#wrapperUploadPortal.h2{
+#wrapperUploadPortal.h2 #overviewWrapper.h2,
+#WrapperTodoList.h2,
+#supportWrapper.h2 {
   font-size: 30pt;
 }
 
-div.select{
+div.select {
   width: 100%;
   min-width: 15ch;
   max-width: 30ch;
@@ -93,25 +97,23 @@ input:focus {
   box-shadow: 0px 10px 0px -7px #4EA6EA, 0px 10px 0px -7px #4EA6EA;
 }
 
-#supportWrapper{
+#supportWrapper {
   text-align: center;
 }
 
 
-#buttonMailto{
+#buttonMailto {
   margin-top: 1em;
 }
 
-#wrapperSalesbyDept, #WrapperSalesSummary, #WrapperLabornSales, #WrapperLogout{
+#wrapperSalesbyDept,
+#WrapperSalesSummary,
+#WrapperLabornSales,
+#WrapperLogout {
   text-align: center;
   font-size: 15pt;
   margin-bottom: 1em;
 }
-
-/* #piechart {
-  display: block;
-  margin: 0 auto;
-} */
 
 .filter {
   position: block;
@@ -120,9 +122,7 @@ input:focus {
   margin-left: 10px;
 }
 
-#summarySalesChartWrapper{
+#summarySalesChartWrapper {
   text-align: center;
   font-size: small;
 }
-
-

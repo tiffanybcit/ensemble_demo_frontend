@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../styles/Login.css";
 
+
+// ===================================================
+// The function will take credentials as an argument, 
+// then it will call the fetch method using the POST option
+// ===================================================
 async function loginUser(credentials) {
   return fetch("https://ensemble-tiffany-demo.herokuapp.com/login", {
     method: "POST",
@@ -13,9 +18,16 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
+  // ===========================================================
+  // create a local state to capture the Username and Password
+  // ===========================================================
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
+  // ================================================
+  // call loginUser with the username and password. 
+  // Call setToken with a successful result
+  // ================================================
   const handleSubmit = async (e) => {
     let inputUser = document.getElementById("usernameField").value;
     let inputPswd = document.getElementById("passwordField").value;
