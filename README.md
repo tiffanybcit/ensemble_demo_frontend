@@ -1,6 +1,6 @@
 # ENSEMBLE DEMO
 
-# Getting Started with Create React App
+# Install React packages
 
 In the project directory, you can run: 
 
