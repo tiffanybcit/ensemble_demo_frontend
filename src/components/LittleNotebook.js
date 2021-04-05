@@ -1,41 +1,47 @@
-// import * as React from "react";
-// import { Chart } from "react-google-charts";
-// import React, { useState, useEffect } from "react";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import "../styles/LittleNotebook.css";
 
-// import "../styles/Support.css";
+//========================
+// COMPONENT
+//========================
 const LittleNotebook = () => {
+  //GLOBAL VARIABLES
   let msgData;
   let i;
 
-  function findIndex(dataSet1, id){
-    for(let i = 0; i < dataSet1.length; i++){
-      if(dataSet1[i] == id){
+  //==============================================
+  // HELPER FUNCTION1 TO FIND THE INDEX OF THE ID
+  //==============================================
+  function findIndex(dataSet1, id) {
+    for (let i = 0; i < dataSet1.length; i++) {
+      if (dataSet1[i] == id) {
         return i;
       }
     }
     return -1;
   }
 
-  function findStatus(dataSet2, index){
+  //======================================================
+  // HELPER FUNCTION TO FIND THE VALUE AT A CERTAIN INDEX
+  //======================================================
+  function findStatus(dataSet2, index) {
     return dataSet2[index];
   }
 
-
+  //========================
+  // READ TASK LIST FROM API
+  //========================
   useEffect(async () => {
     axios
       .get("https://ensemble-tiffany-demo.herokuapp.com/readTask")
       .then((response) => {
-        console.log(response.data);
         msgData = response.data;
-        console.log(msgData);
         let bodyWrapper = document.getElementById("msgBox");
-        console.log(msgData.length);
 
-        // console.log(msgData.length);
-
+        // =============================
+        // ASSEMBLE LIST DYNAMICALLY
+        // =============================
         for (i = 0; i < response.data.length; i++) {
           let gridBox = document.createElement("div");
           bodyWrapper.appendChild(gridBox);
@@ -48,26 +54,35 @@ const LittleNotebook = () => {
           msgBtm.innerHTML = "Content: " + response.data.msg[i];
 
           let status = document.createElement("div");
-          status.innerHTML = "Status: " + response.data.status[i];
+          if (response.data.status[i]) {
+            status.innerHTML = "Status: completed";
+          } else {
+            status.innerHTML = "Status: not completed";
+          }
 
+          //========================
+          // MODIFY STATUS BUTTON AND ASSOCIATED FUNCTION
+          //========================
           let modifyButton = document.createElement("button");
           modifyButton.innerHTML = "Change Status";
           modifyButton.setAttribute("id", response.data.idCollection[i]);
           modifyButton.addEventListener("click", modifyFunction);
           function modifyFunction() {
-            
-            
             let index = findIndex(response.data.idCollection, this.id);
+            if (index < 0) {
+              alert("Something went wrong!");
+            }
             let updatedStatus = findStatus(response.data.status, index);
-            alert(this.id);
 
+            // ================================
+            // USE FETCH TO MAKE UPDATE REQUEST
+            // ================================
             fetch("https://ensemble-tiffany-demo.herokuapp.com/updateTask", {
               method: "put",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 selectedID: this.id,
-                newStatus: !updatedStatus
-
+                newStatus: !updatedStatus,
               }),
             })
               .then((res) => {
@@ -78,12 +93,17 @@ const LittleNotebook = () => {
               });
           }
 
+          //======================================
+          // DELETE BUTTON AND ASSOCIATED FUNCTION
+          //======================================
           let deleteButton = document.createElement("button");
           deleteButton.innerHTML = "Delete";
           deleteButton.setAttribute("id", response.data.idCollection[i]);
           deleteButton.addEventListener("click", deleteFunction);
           function deleteFunction() {
-            alert(this.id);
+            // ================================
+            // USE FETCH TO MAKE DELETE REQUEST
+            // ================================
             fetch("https://ensemble-tiffany-demo.herokuapp.com/deleteTask", {
               method: "delete",
               headers: { "Content-Type": "application/json" },
@@ -99,30 +119,34 @@ const LittleNotebook = () => {
               });
           }
 
+          //========================
+          // ATTACH ELEMENTS
+          //========================
           gridBox.appendChild(msgtop);
           gridBox.appendChild(msgBtm);
           gridBox.appendChild(status);
           gridBox.appendChild(modifyButton);
           let break1 = document.createElement("BR");
           gridBox.appendChild(break1);
+          gridBox.appendChild(deleteButton);
           let break2 = document.createElement("BR");
           gridBox.appendChild(break2);
-          gridBox.appendChild(deleteButton);
-          let break3 = document.createElement("BR");
+          let break3 = document.createElement("hr");
           gridBox.appendChild(break3);
         }
-        // largestID = response.data.idCollection[i];
       });
   }, []);
 
+  //========================
+  // ADD NEW TODOLIST FUNCTION
+  //========================
   function UploadNotebook() {
     let msgSubject = document.getElementById("msgTitleInput").value;
     let msgBody = document.getElementById("msgBodyInput").value;
-    // let biggestID = document.getElementById();
-    console.log(msgSubject);
-    console.log(msgBody);
-    console.log(msgData);
-    console.log(msgData.idCollection[i - 1] + 1);
+
+    //========================
+    // ADD TASK API
+    //========================
     axios
       .post("https://ensemble-tiffany-demo.herokuapp.com/writeTask", {
         msgSubject: msgSubject,
@@ -143,6 +167,9 @@ const LittleNotebook = () => {
       });
   }
 
+  //========================
+  // HELPER: SEARCH TITLE FUNCTION
+  //========================
   function searchFunction() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("searchFieldName");
@@ -166,7 +193,7 @@ const LittleNotebook = () => {
     <div>
       <div id="topPortion">
         <label htmlFor="msgTitle" id="msgTitleLabel">
-          Enter a subject:
+          Enter a title:
         </label>
         <input id="msgTitleInput" />
         <br></br>
@@ -181,13 +208,13 @@ const LittleNotebook = () => {
       <br></br>
       <div id="btnContainer">
         <button onClick={UploadNotebook} id="buttonSubmit">
-          Submit
+          Add
         </button>
       </div>
       <br></br>
       <div id="searchBarContainer">
         <input
-          placeholder="Search by name"
+          placeholder="Search by title"
           type="text"
           id="searchFieldName"
           onKeyUp={searchFunction}

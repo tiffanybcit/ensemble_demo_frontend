@@ -71,12 +71,22 @@ const UploadPortal = () => {
                 // alert("hello");
                 // console.log(data);
                 axios
-                  .post("https://ensemble-tiffany-demo.herokuapp.com/writeLaborCost", {
-                    year: year,
-                    month: month,
-                    rowobj: rowobj,
-                  })
-                  .then(alert("Thanks for submission!"));
+                  .post(
+                    "https://ensemble-tiffany-demo.herokuapp.com/writeLaborCost",
+                    {
+                      year: year,
+                      month: month,
+                      rowobj: rowobj,
+                    }
+                  )
+                  .then(alert("Thanks for submission!"))
+                  .then(function (response) {
+                    if (response.data.msg.localeCompare("success") == 0) {
+                      window.location.reload();
+                    } else {
+                      alert("Error!");
+                    }
+                  });
               } else {
                 // console.log("hi");
                 axios
@@ -89,9 +99,15 @@ const UploadPortal = () => {
                       rowobj: rowobj,
                     }
                   )
-                  .then(function refresh(){
-                      alert("Thanks for submission!");
+                  .then(function refresh() {
+                    alert("Thanks for submission!");
+                  })
+                  .then(function (response) {
+                    if (response.data.msg.localeCompare("success") == 0) {
                       window.location.reload();
+                    } else {
+                      alert("Error!");
+                    }
                   });
                 // .then(window.location.reload());
               }

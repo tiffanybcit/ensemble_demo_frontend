@@ -86,8 +86,8 @@ export const SidebarData = [
     icon: <IoIcons.IoMdHelpCircle />
   },
   {
-    title: 'Notebook',
-    path:"/notebook",
+    title: 'Todo List',
+    path:"/todolist",
     icon: <IoIcons.IoMdNotificationsOutline />
   },
   {

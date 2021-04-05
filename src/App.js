@@ -93,7 +93,7 @@ function App() {
               <Route path="/support">
                 <Support />
               </Route>
-              <Route path="/notebook">
+              <Route path="/todolist">
                 <TodoList />
               </Route>
 
@@ -109,7 +109,15 @@ function App() {
 }
 
 function TodoList() {
-  return <LittleNotebook />;
+  return (
+    <div id="WrapperTodoList">
+    <HeaderWrap>
+      <h2>Todo List</h2>
+    </HeaderWrap>
+   <LittleNotebook />
+  </div>
+  
+  );
 }
 
 function LaborSales() {
@@ -157,8 +165,6 @@ function FileUploadPage() {
 }
 
 function Overview() {
-  // axios.get(http://taco-randomizer.herokuapp.com/random/)
-
   return (
     <div>
       <HeaderWrap>

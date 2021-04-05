@@ -166,14 +166,14 @@ useEffect(async () => {
   dataSet[11][2] = foh11;
   dataSet[12][1] = boh12;
   dataSet[12][2] = foh12;
+
   console.log("trigger 1", dataSet);
 
   setData({ set: dataSet });
 }, []);
 function mySubmitFunction() {
-  let shopSelectionSelection = document.getElementById("shopSelection")
-    .options[document.getElementById("shopSelection").selectedIndex].text;
-  console.log(shopSelectionSelection);
+  let shopSelection = document.getElementById("shopSelection").value;
+  console.log("shopselection"+shopSelection);
   let yearSummarySales = document.getElementById("year").value;
   console.log(yearSummarySales);
   let typeSelectionElement = document.getElementById("typeSelection").value;
@@ -192,64 +192,64 @@ function mySubmitFunction() {
       if (data1["division"][i] != null) {
         if (
           data1["division"][i].localeCompare("FOH") == 0 &&
-          data1["store"][i].localeCompare(yearSummarySales) == 0
+          data1["store"][i].localeCompare(shopSelection) == 0
         ) {
           if (data1["month"][i] == 1 && data1["year"][i] == n) {
-            foh1 = foh1 + parseInt(data1["net"][i]);
+            foh1 = foh1 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 2 && data1["year"][i] == n) {
-            foh2 = foh2 + parseInt(data1["net"][i]);
+            foh2 = foh2 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 3 && data1["year"][i] == n) {
-            foh3 = foh3 + parseInt(data1["net"][i]);
+            foh3 = foh3 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 4 && data1["year"][i] == n) {
-            foh4 = foh4 + parseInt(data1["net"][i]);
+            foh4 = foh4 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 5 && data1["year"][i] == n) {
-            foh5 = foh5 + parseInt(data1["net"][i]);
+            foh5 = foh5 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 6 && data1["year"][i] == n) {
-            foh6 = foh6 + parseInt(data1["net"][i]);
+            foh6 = foh6 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 7 && data1["year"][i] == n) {
-            foh7 = foh7 + parseInt(data1["net"][i]);
+            foh7 = foh7 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 8 && data1["year"][i] == n) {
-            foh8 = foh8 + parseInt(data1["net"][i]);
+            foh8 = foh8 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 9 && data1["year"][i] == n) {
-            foh9 = foh9 + parseInt(data1["net"][i]);
+            foh9 = foh9 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 10 && data1["year"][i] == n) {
-            foh10 = foh10 + parseInt(data1["net"][i]);
+            foh10 = foh10 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 11 && data1["year"][i] == n) {
-            foh11 = foh11 + parseInt(data1["net"][i]);
+            foh11 = foh11 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 12 && data1["year"][i] == n) {
-            foh12 = foh12 + parseInt(data1["net"][i]);
+            foh12 = foh12 + parseInt(data1[typeSelectionElement][i]);
           }
         } else if (
           data1["division"][i].localeCompare("BOH") == 0 &&
-          data1["store"][i].localeCompare(yearSummarySales) == 0
+          data1["store"][i].localeCompare(shopSelection) == 0
         ) {
           if (data1["month"][i] == 1 && data1["year"][i] == n) {
-            boh1 = boh1 + parseInt(data1["net"][i]);
+            boh1 = boh1 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 2 && data1["year"][i] == n) {
-            boh2 = boh2 + parseInt(data1["net"][i]);
+            boh2 = boh2 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 3 && data1["year"][i] == n) {
-            boh3 = boh3 + parseInt(data1["net"][i]);
+            boh3 = boh3 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 4 && data1["year"][i] == n) {
-            boh4 = boh4 + parseInt(data1["net"][i]);
+            boh4 = boh4 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 5 && data1["year"][i] == n) {
-            boh5 = boh5 + parseInt(data1["net"][i]);
+            boh5 = boh5 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 6 && data1["year"][i] == n) {
-            boh6 = boh6 + parseInt(data1["net"][i]);
+            boh6 = boh6 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 7 && data1["year"][i] == n) {
-            boh7 = boh7 + parseInt(data1["net"][i]);
+            boh7 = boh7 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 8 && data1["year"][i] == n) {
-            boh8 = boh8 + parseInt(data1["net"][i]);
+            boh8 = boh8 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 9 && data1["year"][i] == n) {
-            boh9 = boh9 + parseInt(data1["net"][i]);
+            boh9 = boh9 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 10 && data1["year"][i] == n) {
-            boh10 = boh10 + parseInt(data1["net"][i]);
+            boh10 = boh10 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 11 && data1["year"][i] == n) {
-            boh11 = boh11 + parseInt(data1["net"][i]);
+            boh11 = boh11 + parseInt(data1[typeSelectionElement][i]);
           } else if (data1["month"][i] == 12 && data1["year"][i] == n) {
-            boh12 = boh12 + parseInt(data1["net"][i]);
+            boh12 = boh12 + parseInt(data1[typeSelectionElement][i]);
           }
         }
-      }
+      } 
     }
     let dataSet = [
       ["Month", "FOH", "BOH"],
@@ -323,19 +323,16 @@ return (
       <div id="shopOption">
         <label htmlFor="shopSelection">Choose a store: </label>
         <select name="shopSelection" id="shopSelection">
-          <option value="polygon">Polygon</option>
-          <option value="gastown">Gastown</option>
-          <option value="store3">3</option>
-          <option value="store4">4</option>
-          <option value="store5">5</option>
+          <option value="Polygon">Polygon</option>
+          <option value="Gastown">Gastown</option>
         </select>
       </div>
       <br></br>
       <div id="typeOption">
         <label htmlFor="typeSelection">Choose net or gross: </label>
         <select name="typeSelection" id="typeSelection">
-          <option value="netReport">Net</option>
-          <option value="grossReport">Gross</option>
+          <option value="net">Net</option>
+          <option value="gross">Gross</option>
         </select>
       </div>
       <br></br>
