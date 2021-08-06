@@ -1,4 +1,4 @@
-# ENSEMBLE DEMO
+# DEMO
 
 # Install React packages
 
