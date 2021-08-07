@@ -1,4 +1,4 @@
-# DEMO
+# # Frontend to a data analytics project: [clickme for backend](https://github.com/tiffanybcit/nodejs_project_demo_backend)
 
 # Install React packages
 
